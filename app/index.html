@@ -176,6 +176,29 @@ a{color:var(--cyan)}
 </div>
 </div>
 <div class="note"><b>Engineering interpretation:</b> The reported difference is 2.4 percentage points of oxygen. NASA describes this as a negative oxygen margin of safety and cautions that normal-gravity flammability limits should be derated. Do not treat 13.6% as a universal ignition threshold: sustained flame propagation and ignition are different phenomena, and the compared gravity environments are not interchangeable.</div>
+<h3 style="margin-top:20px">Interactive experiment compatibility check</h3>
+<p class="muted">Enter metadata for a second documented experiment. PHOENIX checks whether key comparison conditions match; it does not predict flame behavior.</p>
+<div class="grid">
+<div class="material">
+<h3>Reference case A · NASA BASS-II</h3>
+<p>PMMA rod · microgravity · 13.6% O₂ · steady flame spreading</p>
+</div>
+<div class="material">
+<h3>Case B · enter source-record values</h3>
+<label>Material family</label>
+<select id="cmpMaterial"><option value="">Select / unknown</option><option>PMMA / acrylic</option><option>Nomex / aramid fabric</option><option>SIBAL composite fabric</option><option>Other</option></select>
+<label>Sample geometry</label>
+<select id="cmpGeometry"><option value="">Select / unknown</option><option>Rod</option><option>Film</option><option>Slab</option><option>Fabric</option><option>Other</option></select>
+<label>Gravity regime</label>
+<select id="cmpGravity"><option value="">Select / unknown</option><option>Microgravity</option><option>1-g</option><option>Other</option></select>
+<label>Oxygen concentration (% by volume)</label>
+<input id="cmpOxygen" type="number" min="0" max="100" step="0.1" placeholder="Enter measured value">
+<label>Observed outcome</label>
+<select id="cmpOutcome"><option value="">Select / unknown</option><option>Ignition</option><option>Sustained flame spreading</option><option>Flame regression</option><option>Quenching</option><option>Blowoff / flame displacement</option><option>Verified extinction</option><option>Reignition</option></select>
+</div>
+</div>
+<button class="primary" onclick="compareCases()">Check comparison compatibility</button>
+<div id="cmpResult" class="result"></div>
 <h3 style="margin-top:18px">What PHOENIX should preserve when comparing experiments</h3>
 <ul>
 <li>Material identity and sample geometry</li>
@@ -330,6 +353,29 @@ let i=document.getElementById('inspect').value;
 let l=document.getElementById('loc').value;
 let action=d==='Impact / strike'?'Characterize impact location, dimensions, depth, possible subsurface damage and affected interfaces.':d==='Crack / fracture'?'Measure crack length, width, depth, orientation and relation to underlying structure.':d==='Erosion / recession'?'Measure material loss and remaining thickness; identify the cause and applicable allowable limits.':d==='Bond / attachment concern'?'Inspect bond lines, gaps, seams, fasteners and adjacent structure.':'Identify and document the condition before drawing conclusions.';
 box('eresult','<b class="warn">ENGINEERING INSPECTION REVIEW REQUIRED</b><p><b>System:</b> '+m+' · <b>Observation:</b> '+d+'</p><p>'+action+'</p><p><b>Evidence level:</b> '+i+'. '+(l==='Not localized / unknown'?'Damage location is not localized; localization is a priority.':'Location is selected as localized; record coordinates and configuration.')+'</p><p>An observed defect does not alone establish loss of thermal protection or re-entry failure. Compare findings with vehicle-specific engineering criteria.</p>');
+}
+function compareCases(){
+let m=document.getElementById('cmpMaterial').value;
+let g=document.getElementById('cmpGeometry').value;
+let grav=document.getElementById('cmpGravity').value;
+let oxygen=document.getElementById('cmpOxygen').value;
+let outcome=document.getElementById('cmpOutcome').value;
+let gaps=[];
+if(!m)gaps.push('material family');
+if(!g)gaps.push('sample geometry');
+if(!grav)gaps.push('gravity regime');
+if(!oxygen)gaps.push('oxygen concentration');
+if(!outcome)gaps.push('observed outcome');
+let checks=[];
+if(m)checks.push(m==='PMMA / acrylic'?'Material family matches reference case A.':'Material family differs from reference case A; do not compare as the same material.');
+if(g)checks.push(g==='Rod'?'Sample geometry matches reference case A.':'Sample geometry differs from reference case A; geometry-specific behavior may differ.');
+if(grav)checks.push(grav==='Microgravity'?'Gravity regime matches reference case A.':'Gravity regime differs from reference case A; gravity is a major confounding condition.');
+if(oxygen){let delta=Math.abs(Number(oxygen)-13.6);checks.push('Oxygen differs from the 13.6% reference by '+delta.toFixed(1)+' percentage points. Check whether values are initial or final and verify test conditions.');}
+if(outcome)checks.push('Case B outcome recorded as: '+outcome+'. Outcomes such as blowoff, quenching and verified extinction are not interchangeable.');
+let compatible=m==='PMMA / acrylic'&&g==='Rod'&&grav==='Microgravity';
+let heading=compatible?'KEY MATERIAL / GEOMETRY / GRAVITY FIELDS MATCH':'COMPARISON REQUIRES CAUTION';
+let gapText=gaps.length?'Missing source-record fields: '+gaps.join(', ')+'.':'All requested fields have entries; verify them against the original source.';
+box('cmpResult','<b class="'+(compatible?'ok':'warn')+'">'+heading+'</b><p>'+checks.join('</p><p>')+'</p><p><b>Data completeness:</b> '+gapText+'</p><p><b>Reference outcome:</b> NASA-reported steady flame spreading at 13.6% O₂ in BASS-II microgravity. This check assesses metadata similarity only; it does not establish equivalent test apparatus, airflow, pressure, ignition protocol or uncertainty, and does not predict the result of Case B.</p>');
 }
 function interpret(){
 let q=document.getElementById('question').value;
