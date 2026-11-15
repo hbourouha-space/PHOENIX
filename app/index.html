@@ -268,7 +268,13 @@ a{color:var(--cyan)}
 <section id="research" class="view">
 <div class="panel">
 <h2>NASA Physical Sciences Informatics (PSI) research</h2>
-<p class="muted">NASA PSI is the primary research source. The links below open selected investigation records; this prototype does not yet make live API calls, download datasets, or automatically ingest repository files.</p>
+<p class="muted">Search the live NASA Physical Sciences Informatics repository or open selected investigation records. Searches open directly on NASA's site; PHOENIX does not download or ingest repository files.</p>
+<div class="material" style="margin:14px 0">
+<label for="psiSearchQuery">Search NASA PSI investigations</label>
+<input id="psiSearchQuery" type="search" placeholder="e.g. PMMA flame spread, microgravity combustion, smoke">
+<button class="primary" onclick="searchPSI('psiSearchQuery')">Search NASA PSI ↗</button>
+<p class="small">Search terms are sent to NASA PSI. Review original investigation records, metadata and DOI citation details.</p>
+</div>
 <div class="source"><div><b>SAFFIRE-I · PSI-98</b><div class="small">Spacecraft fire experiments</div></div><a target="_blank" rel="noopener" href="https://psi.nasa.gov/physci/repo/data/investigations/PSI-98">Open NASA record ↗</a></div>
 <div class="source"><div><b>BASS-II · PSI-25</b><div class="small">Flame behavior in microgravity; review individual material and test conditions</div></div><a target="_blank" rel="noopener" href="https://psi.nasa.gov/physci/repo/data/investigations/PSI-25">Open NASA record ↗</a></div>
 <div class="source"><div><b>SAME-R · PSI-101</b><div class="small">Smoke and aerosol-related research</div></div><a target="_blank" rel="noopener" href="https://psi.nasa.gov/physci/repo/data/investigations/PSI-101">Open NASA record ↗</a></div>
@@ -282,7 +288,7 @@ a{color:var(--cyan)}
 <section id="interpreter" class="view">
 <div class="panel">
 <h2>PHOENIX Scientific Interpreter</h2>
-<p class="muted">A curated prototype guide—not a connected generative-AI service. Choose a question to see a prepared scientific interpretation and the evidence needed next.</p>
+<p class="muted">A research-guidance feature combining curated scientific interpretation with direct searches of NASA PSI. It does not claim to be a connected generative-AI service.</p>
 <label>What do you want to investigate?</label>
 <select id="question">
 <option value="material">How should I compare fire behavior across materials?</option>
@@ -292,8 +298,14 @@ a{color:var(--cyan)}
 <option value="recommend">How should evidence become an engineering recommendation?</option>
 </select>
 <button class="primary" onclick="interpret()">Interpret research question</button>
+<div class="material" style="margin-top:14px">
+<label for="siSearchQuery">Find NASA evidence related to your question</label>
+<input id="siSearchQuery" type="search" placeholder="Enter a material, phenomenon or research topic">
+<button class="primary" onclick="searchPSI('siSearchQuery')">Find supporting NASA research ↗</button>
+<p class="small">PHOENIX opens matching NASA PSI investigation results so you can inspect the source evidence alongside the interpretation.</p>
+</div>
 <div id="airesult" class="result"></div>
-<div class="note">AI integration status: no external model or API is connected in this version. Responses are authored guidance. A future AI connection must retrieve cited PSI evidence, expose uncertainty and avoid unsupported predictions.</div>
+<div class="note">Scientific Interpreter status: curated explanations plus live NASA PSI repository search. No external AI model is connected; interpretations are not generated from retrieved records automatically. Verify claims against NASA source documents.</div>
 </div>
 </section>
 
@@ -382,6 +394,13 @@ let compatible=m==='PMMA / acrylic'&&g==='Rod'&&grav==='Microgravity';
 let heading=compatible?'KEY MATERIAL / GEOMETRY / GRAVITY FIELDS MATCH':'COMPARISON REQUIRES CAUTION';
 let gapText=gaps.length?'Missing source-record fields: '+gaps.join(', ')+'.':'All requested fields have entries; verify them against the original source.';
 box('cmpResult','<b class="'+(compatible?'ok':'warn')+'">'+heading+'</b><p>'+checks.join('</p><p>')+'</p><p><b>Data completeness:</b> '+gapText+'</p><p><b>Reference outcome:</b> NASA-reported steady flame spreading at 13.6% O₂ in BASS-II microgravity. This check assesses metadata similarity only; it does not establish equivalent test apparatus, airflow, pressure, ignition protocol or uncertainty, and does not predict the result of Case B.</p>');
+}
+function searchPSI(inputId){
+let field=document.getElementById(inputId);
+let term=field.value.trim();
+if(!term){field.focus();return;}
+let url='https://psi.nasa.gov/physci/repo/search?data_source=psi&data_type=investigation&q='+encodeURIComponent(term);
+window.open(url,'_blank','noopener');
 }
 function interpret(){
 let q=document.getElementById('question').value;
