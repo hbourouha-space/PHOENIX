@@ -83,6 +83,7 @@ a{color:var(--cyan)}
 <nav class="nav">
 <button class="active" onclick="show('overview',this)">Overview</button>
 <button onclick="show('internal',this)">Internal Fire Engine</button>
+<button onclick="show('comparison',this)">Experimental Comparison</button>
 <button onclick="show('external',this)">External Integrity Engine</button>
 <button onclick="show('materials',this)">Materials Dashboard</button>
 <button onclick="show('research',this)">NASA PSI Research</button>
@@ -153,6 +154,40 @@ a{color:var(--cyan)}
 <button class="primary" onclick="screenInternal()">Screen evidence conditions</button>
 <div id="iresult" class="result"></div>
 <div class="note">Material-specific rule: do not combine PMMA films, slabs and rods—or unrelated fabrics and insulation—into one generic flame model. Blowoff is not proof of extinction; verify extinction and check for reignition.</div>
+</div>
+</section>
+
+<section id="comparison" class="view">
+<div class="panel">
+<h2>BASS-II Experimental Comparison</h2>
+<p class="muted">A source-traceable comparison of NASA-reported PMMA rod observations. Values below are reported findings, not model predictions or universal safety limits.</p>
+<div class="grid">
+<div class="material">
+<span class="pill">Microgravity · BASS-II</span>
+<h3>Steady flame spreading</h3>
+<div style="font-size:30px;font-weight:bold;color:var(--cyan)">13.6% O₂</div>
+<p>NASA reports steady spreading on a ¼-inch PMMA rod in BASS-II microgravity.</p>
+</div>
+<div class="material">
+<span class="pill">1-g comparison</span>
+<h3>Blowoff condition</h3>
+<div style="font-size:30px;font-weight:bold;color:var(--cyan)">16.0% O₂</div>
+<p>NASA reports a 1-g blowoff condition for a ¼-inch PMMA rod.</p>
+</div>
+</div>
+<div class="note"><b>Engineering interpretation:</b> The reported difference is 2.4 percentage points of oxygen. NASA describes this as a negative oxygen margin of safety and cautions that normal-gravity flammability limits should be derated. Do not treat 13.6% as a universal ignition threshold: sustained flame propagation and ignition are different phenomena, and the compared gravity environments are not interchangeable.</div>
+<h3 style="margin-top:18px">What PHOENIX should preserve when comparing experiments</h3>
+<ul>
+<li>Material identity and sample geometry</li>
+<li>Gravity regime and test apparatus</li>
+<li>Oxygen concentration and whether it is initial or final</li>
+<li>Flow configuration and measured velocity or stretch rate</li>
+<li>Observed outcome: ignition, sustained spread, quenching, blowoff or verified extinction</li>
+<li>Source document, test identifier and measurement uncertainty</li>
+</ul>
+<div class="source"><div><b>NASA BASS-II research presentation</b><div class="small">Spacecraft Materials Microgravity Research on Flammability · NASA Glenn Research Center</div></div><a target="_blank" rel="noopener" href="https://ntrs.nasa.gov/api/citations/20160000593/downloads/20160000593.pdf">Open NASA source ↗</a></div>
+<div class="source"><div><b>BASS-II Summary Report</b><div class="small">NASA/TM-20210011385 · 2021</div></div><a target="_blank" rel="noopener" href="https://ntrs.nasa.gov/citations/20210011385">Open NASA report record ↗</a></div>
+<p class="small">This comparison reproduces a NASA-reported observation. It is not a validated predictive model, does not establish a spacecraft material acceptance limit, and must not be generalized to PMMA films, slabs, other rod diameters, other materials or different test configurations.</p>
 </div>
 </section>
 
