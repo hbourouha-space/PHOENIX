@@ -127,7 +127,7 @@ a{color:var(--cyan)}
 <label>Material form / geometry</label>
 <select id="iform"><option>Film</option><option>Slab</option><option>Rod</option><option>Fabric</option><option>Wire / coating</option><option>Unknown</option></select>
 <label>Oxygen condition</label>
-<select id="ioxygen"><option>Measured value available</option><option>Elevated / enriched</option><option>Nominal cabin condition</option><option>Unknown</option></select>
+<select id="ioxygen"><option>Unknown</option><option>Measured value available</option><option>Elevated / enriched</option><option>Nominal cabin condition</option></select>
 <label>Measured oxygen concentration (% by volume)</label>
 <input id="io2value" type="number" min="0" max="100" step="0.1" placeholder="e.g. 20.6; leave blank if unknown">
 <label>Material thickness</label>
@@ -137,17 +137,17 @@ a{color:var(--cyan)}
 </div>
 <div>
 <label>Airflow / ventilation</label>
-<select id="iair"><option>Measured / characterized</option><option>Low / quiescent</option><option>Forced airflow</option><option>Variable / unknown</option></select>
+<select id="iair"><option>Variable / unknown</option><option>Measured / characterized</option><option>Low / quiescent</option><option>Forced airflow</option></select>
 <label>Measured airflow velocity (cm/s)</label>
 <input id="iairvalue" type="number" min="0" step="0.1" placeholder="e.g. 5; leave blank if unknown">
 <label>Flow direction</label>
-<select id="iflowdir"><option>Opposed flow</option><option>Concurrent flow</option><option>Other / not documented</option></select>
+<select id="iflowdir"><option>Other / not documented</option><option>Opposed flow</option><option>Concurrent flow</option></select>
 <label>Ventilation configuration</label>
-<select id="ivent"><option>Known / documented</option><option>Supply and return locations known</option><option>Local flow field measured</option><option>Unknown</option></select>
+<select id="ivent"><option>Unknown</option><option>Known / documented</option><option>Supply and return locations known</option><option>Local flow field measured</option></select>
 <label>Ignition evidence</label>
-<select id="iignition"><option>Known ignition source</option><option>Observed ignition</option><option>No ignition observed</option><option>Unknown</option></select>
+<select id="iignition"><option>Unknown</option><option>Known ignition source</option><option>Observed ignition</option><option>No ignition observed</option></select>
 <label>Suppression observation</label>
-<select id="isuppression"><option>Extinction verified</option><option>Flame displaced / blowoff only</option><option>Reignition observed</option><option>Not tested / unknown</option></select>
+<select id="isuppression"><option>Not tested / unknown</option><option>Extinction verified</option><option>Flame displaced / blowoff only</option><option>Reignition observed</option></select>
 </div>
 </div>
 <button class="primary" onclick="screenInternal()">Screen evidence conditions</button>
