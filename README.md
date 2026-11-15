@@ -72,6 +72,14 @@ The intended architecture combines:
 
 **Physics models calculate. AI interprets. PHOENIX explains the evidence.**
 
+## Live Demonstration
+
+Open the PHOENIX prototype: https://hbourouha-space.github.io/PHOENIX/app/
+
+The application is organized into an overview, internal fire evidence screen, BASS-II experimental comparison, external integrity screen, materials dashboard, NASA research links, scientific interpreter and engineering workflow.
+
+The BASS-II comparison panel presents a NASA-reported PMMA rod example and includes an interactive metadata compatibility check. The check flags selected differences and missing fields; it is not a predictive combustion model.
+
 ## Current Prototype Status
 
 The current GitHub prototype includes an interactive research catalogue, investigation links, guided scientific interpretation prompts and engineering principles.
