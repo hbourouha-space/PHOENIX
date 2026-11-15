@@ -10,6 +10,12 @@ A small ignition event inside a spacecraft can develop into a serious threat to 
 
 NASA has conducted numerous combustion investigations in space. However, locating, comparing and interpreting the scientific evidence across these investigations can be challenging.
 
+## The PHOENIX Engineering Principle
+
+*How do we prevent a small fire or ignition event from becoming a catastrophic chain of failures?*
+
+**Don't just detect a flame. Understand what allows it to propagate, identify what can interrupt it, and verify that it is truly extinguished.**
+
 ## Our Solution
 
 PHOENIX is a research and engineering decision-support prototype designed to organize NASA combustion science and translate experimental evidence into insights relevant to spacecraft fire safety. AI-assisted interpretation is part of the intended architecture, but a generative-AI model is not connected in the current prototype.
