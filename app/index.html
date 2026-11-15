@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHOENIX | Spaceflight Fire Intelligence</title>
+<style>
+:root{--bg:#091321;--panel:#122238;--line:#29415b;--text:#edf4fc;--muted:#a7b8ca;--cyan:#55d6e8;--gold:#f0bd69}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px Arial,sans-serif}
+header{padding:25px 6%;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.brand{font-size:27px;font-weight:800;letter-spacing:3px}
+.brand span{color:var(--cyan)}
+.tag{color:var(--muted);font-size:12px;letter-spacing:1px;margin-top:6px}
+.status{border:1px solid #397c72;color:#80dfbd;border-radius:20px;padding:8px 12px;font-size:12px}
+main{max-width:1150px;margin:auto;padding:35px 22px}
+.hero{padding:32px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(120deg,#142b43,#102033)}
+.eyebrow{color:var(--cyan);font-size:12px;letter-spacing:2px;font-weight:bold}
+h1{font-size:clamp(30px,5vw,48px);margin:15px 0}
+p{line-height:1.6;color:var(--muted)}
+h2{font-size:21px;margin:32px 0 14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:22px}
+.stat,.card,.workspace{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.stat strong{display:block;font-size:25px;color:var(--cyan);margin-bottom:5px}
+.stat small{color:var(--muted)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+input,select,button{font:inherit;border-radius:8px;padding:12px;border:1px solid var(--line)}
+input,select{background:#0b1929;color:var(--text);flex:1;min-width:190px}
+button{background:#17445a;color:white;cursor:pointer}
+button:hover{background:#21627a}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card h3{margin:8px 0;color:#fff}
+.card p{font-size:14px}
+.card a{color:var(--cyan);text-decoration:none}
+.pill{font-size:11px;color:var(--gold);letter-spacing:1px}
+.workspace{margin-top:25px}
+.answer{white-space:pre-wrap;background:#0b1929;border-radius:9px;padding:16px;margin-top:14px;min-height:90px;color:#d7e8f4;line-height:1.6}
+footer{border-top:1px solid var(--line);padding:25px 6%;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<header>
+ <div><div class="brand">PHOENI<span>X</span></div><div class="tag">SPACEFLIGHT FIRE INTELLIGENCE</div></div>
+ <div class="status">● RESEARCH PROTOTYPE</div>
+</header>
+<main>
+<section class="hero">
+ <div class="eyebrow">DETECT EARLY · ASSESS THE RISK · PROTECT THE CREW</div>
+ <h1>Turning combustion science into crew protection.</h1>
+ <p>PHOENIX is an evidence-centered research platform designed to help engineers explore NASA combustion investigations, compare fire behavior, and identify knowledge gaps relevant to spacecraft and future exploration habitats.</p>
+ <div class="stats">
+  <div class="stat"><strong>NASA PSI</strong><small>Primary research source</small></div>
+  <div class="stat"><strong>6</strong><small>Featured investigation families</small></div>
+  <div class="stat"><strong>3</strong><small>Research priorities: prevention, detection, suppression</small></div>
+ </div>
+</section>
+
+<h2>NASA combustion research catalogue</h2>
+<p>Explore selected NASA investigations. Follow each source link to the original research record. The catalogue is a curated starting point, not a complete mirror of NASA's archive.</p>
+<div class="tools">
+ <input id="search" placeholder="Search investigations, materials or phenomena..." oninput="render()">
+ <select id="filter" onchange="render()">
+  <option value="all">All research areas</option>
+  <option value="Fire growth">Fire growth and spread</option>
+  <option value="Smoke">Smoke and detection</option>
+  <option value="Flames">Flame behavior</option>
+  <option value="Droplets">Droplet combustion</option>
+ </select>
+</div>
+<div class="grid" id="catalogue"></div>
+
+<h2>PHOENIX scientific interpreter</h2>
+<div class="workspace">
+ <div class="eyebrow">EVIDENCE-BASED RESEARCH WORKSPACE</div>
+ <p>Choose a research question to see the evidence considerations PHOENIX should investigate. This initial version is a guided prototype, not a connected generative AI service.</p>
+ <select id="question">
+  <option value="material">How could cabin material affect fire propagation?</option>
+  <option value="oxygen">How does oxygen concentration affect fire risk?</option>
+  <option value="smoke">What research informs smoke detection?</option>
+  <option value="suppression">How should extinguishment be evaluated?</option>
+ </select>
+ <button onclick="interpret()">Analyze research question</button>
+ <div class="answer" id="answer">Select a question and choose Analyze to see the scientific evidence checklist.</div>
+</div>
+
+<h2>Engineering principles</h2>
+<div class="grid">
+ <div class="card"><div class="pill">01 · PREVENTION</div><h3>Understand ignition</h3><p>Evaluate material identity, geometry, ignition conditions, oxygen environment and local airflow.</p></div>
+ <div class="card"><div class="pill">02 · DETECTION</div><h3>Recognize early signals</h3><p>Investigate smoke, temperature, gas concentrations, optical signals and sensor response.</p></div>
+ <div class="card"><div class="pill">03 · SUPPRESSION</div><h3>Verify extinction</h3><p>Distinguish true extinction from flame displacement or blowoff. Consider reignition and secondary ignition.</p></div>
+</div>
+<div class="workspace">
+ <div class="eyebrow">SCIENTIFIC INTEGRITY</div>
+ <p>Different materials and geometries can behave differently. PHOENIX must not apply one generic flame-spread or suppression model to all cabin materials. Unknown measurements must remain unknown. A simulated scenario is not a validated spacecraft safety assessment.</p>
+</div>
+</main>
+<footer>PHOENIX · NASA combustion science research interface · Prototype version 1.0<br>Research source: NASA Physical Sciences Informatics (PSI). PHOENIX is an independent research prototype, not a NASA-certified safety system.</footer>
+<script>
+const studies=[
+{name:"SAFFIRE-I",area:"Fire growth",detail:"Spacecraft fire growth and behavior in a large-scale vehicle environment. Includes imagery and measurements relevant to flame spread and combustion products.",source:"https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",doi:"10.60555/0t15-1z43"},
+{name:"BASS-II",area:"Fire growth",detail:"Solid-fuel ignition, flame spread and extinction under low-velocity forced flow in microgravity. Material and geometry matter.",source:"https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",doi:"10.60555/4qc4-de67"},
+{name:"SAME-R",area:"Smoke",detail:"Smoke aerosol particle-size distributions and smoke detector response in microgravity.",source:"https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",doi:"10.60555/2np7-jv14"},
+{name:"SPICE",area:"Flames",detail:"Non-buoyant jet diffusion flames. Relevant to flame structure, flame length and smoke-point research.",source:"https://psi.nasa.gov/physci/repo/data/investigations/PSI-107",doi:"10.60555/9kbh-e962"},
+{name:"ACME",area:"Flames",detail:"Combustion experiments in the Combustion Integrated Rack, including flame structure, soot, stability and extinction studies.",source:"https://science.nasa.gov/biological-physical/investigations/acme/",doi:"NASA Science investigation portal"},
+{name:"FLEX",area:"Droplets",detail:"Liquid-fuel droplet combustion, burning behavior, extinction and inert-gas effects.",source:"https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",doi:"10.60555/mbq8-0451"}
+];
+function render(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const f=document.getElementById("filter").value;
+ const found=studies.filter(s=>(f==="all"||s.area===f)&&(s.name+" "+s.area+" "+s.detail).toLowerCase().includes(q));
+ document.getElementById("catalogue").innerHTML=found.map(s=>`<article class="card"><div class="pill">${s.area.toUpperCase()}</div><h3>${s.name}</h3><p>${s.detail}</p><p><small>Record identifier: ${s.doi}</small></p><a href="${s.source}" target="_blank" rel="noopener">Open NASA research source ↗</a></article>`).join("")||"<p>No matching investigations found.</p>";
+}
+function interpret(){
+ const q=document.getElementById("question").value;
+ const answers={
+ material:"MATERIAL-SPECIFIC REVIEW\n\nIdentify the exact material, thickness, shape and orientation. Compare relevant solid-fuel evidence such as BASS-II and SAFFIRE. Examine ignition source, oxygen concentration, pressure, airflow and ventilation. Do not transfer results between materials without supporting evidence.\n\nEvidence needed: material identity, geometry, ignition conditions, flame observations and measurement uncertainty.",
+ oxygen:"OXYGEN-ENVIRONMENT REVIEW\n\nOxygen concentration and partial pressure can influence ignition and combustion behavior. Compare experiments only when pressure, fuel, flow and test configuration are understood. A result from a gaseous flame experiment is not automatically evidence for solid cabin materials.\n\nEvidence needed: oxygen fraction, total pressure, fuel, flow and experimental configuration.",
+ smoke:"SMOKE-DETECTION REVIEW\n\nSAME-R is relevant to smoke aerosol characteristics and detector response in microgravity. Consider particle-size distribution, detector type, placement, airflow and background aerosols.\n\nEvidence needed: aerosol properties, detector response, test conditions and false-alarm limitations.",
+ suppression:"SUPPRESSION-VERIFICATION REVIEW\n\nDistinguish extinction from flame displacement or blowoff. Determine whether combustion actually stopped, whether reignition occurred, and whether unburned fuel or hot surfaces could cause secondary ignition.\n\nEvidence needed: time-resolved flame observations, gas measurements, oxygen conditions, flow and post-event monitoring."
+ };
+ document.getElementById("answer").textContent=answers[q]+"\n\nPrototype guidance only. Consult original NASA records before making engineering decisions.";
+}
+render();
+</script>
+</body>
+</html>
