@@ -94,6 +94,7 @@ a{color:var(--cyan)}
 <button onclick="show('materials',this)">Materials Dashboard</button>
 <button onclick="show('research',this)">NASA PSI Research</button>
 <button onclick="show('interpreter',this)">Scientific Interpreter</button>
+<button onclick="show('si-dashboard',this)">SI Research Dashboard</button>
 <button onclick="show('workflow',this)">Engineering Workflow</button>
 </nav>
 
@@ -309,6 +310,48 @@ a{color:var(--cyan)}
 </div>
 </section>
 
+
+<section id="si-dashboard" class="view">
+<div class="panel">
+<h2>PHOENIX · SI Research Intelligence Dashboard</h2>
+<p class="muted">An interactive, transparent research-triage prototype. It ranks curated investigation families by their stated relevance to your selected fire-safety question. It does not ingest PSI records automatically, calculate hazard probabilities or replace expert review.</p>
+<div class="grid">
+<div>
+<label for="siMission">Mission environment</label>
+<select id="siMission">
+<option value="habitat">Crew habitat / space station</option>
+<option value="lunar">Lunar base / pressurized rover</option>
+<option value="mars">Mars transit / habitat</option>
+</select>
+<label for="siNeed">Fire-safety question</label>
+<select id="siNeed">
+<option value="solids">Preventing ignition and flame spread in solid materials</option>
+<option value="smoke">Detecting smoke and aerosols</option>
+<option value="suppress">Suppressing or extinguishing flames</option>
+<option value="gases">Understanding gas-phase combustion</option>
+<option value="broad">Explore the overall spacecraft fire-safety evidence</option>
+</select>
+</div>
+<div>
+<label for="siMaterial">Material / phenomenon of interest</label>
+<select id="siMaterial">
+<option value="any">No specific material / broad search</option>
+<option value="pmma">PMMA / polymer solids</option>
+<option value="fabric">Fabrics / textiles</option>
+<option value="smoke">Smoke / aerosols</option>
+<option value="suppression">CO₂ / helium suppression</option>
+<option value="gas">Gaseous fuels / flames</option>
+</select>
+<label for="siQuestion">Research question (optional)</label>
+<input id="siQuestion" type="text" placeholder="e.g. How does airflow affect PMMA flame spread?">
+</div>
+</div>
+<button class="primary" onclick="rankResearch()">Rank relevant NASA research</button>
+<div id="siRankResult" class="result"></div>
+<div class="note"><b>How ranking works:</b> PHOENIX uses a visible, rule-based relevance rubric based on investigation purpose and your selected question. Scores indicate topic relevance only—not experimental quality, material safety, flammability, or mission risk. Rankings are curated and should be verified against original NASA records.</div>
+</div>
+</section>
+
 <section id="workflow" class="view">
 <div class="panel">
 <h2>From NASA evidence to engineering decision</h2>
@@ -401,6 +444,42 @@ let term=field.value.trim();
 if(!term){field.focus();return;}
 let url='https://psi.nasa.gov/physci/repo/search?data_source=psi&data_type=investigation&q='+encodeURIComponent(term);
 window.open(url,'_blank','noopener');
+}
+
+const phoenixResearch = [
+{id:'bass',name:'BASS / BASS-II',focus:'Solid-material flammability and flame behavior',url:'https://psi.nasa.gov/physci/repo/data/investigations/PSI-25',tags:['solids','pmma','fabric'],summary:'Directly relevant to solid-material flame behavior. Compare individual material, sample geometry, oxygen, pressure, airflow, ignition and apparatus conditions; do not generalize across samples.'},
+{id:'saffire',name:'SAFFIRE-I, -II and -III',focus:'Spacecraft-scale fire behavior',url:'https://psi.nasa.gov/physci/repo/data/investigations/PSI-98',tags:['solids','broad'],summary:'Relevant to understanding fire behavior in spacecraft-scale environments. Check each investigation and test configuration before applying a result to a specific material or vehicle.'},
+{id:'same',name:'SAME / SAME-R',focus:'Smoke and aerosol measurement',url:'https://psi.nasa.gov/physci/repo/data/investigations/PSI-101',tags:['smoke','broad'],summary:'Directly relevant to smoke and aerosol detection and measurement. Useful for questions about sensing and interpreting fire-related particulates, not solid-material flame-spread limits.'},
+{id:'flex',name:'FLEX',focus:'Flame extinguishment using CO₂ and helium dilution',url:'https://psi.nasa.gov/physci/repo/data/investigations/PSI-69',tags:['suppress','broad','suppression'],summary:'Directly relevant to flame-extinguishment mechanisms studied through chamber-atmosphere dilution. Review fuel, chamber conditions, suppressant concentration and endpoint definitions.'},
+{id:'spice',name:'SPICE',focus:'Combustion in fan-driven flow',url:'https://psi.nasa.gov/physci/repo/data/investigations/PSI-107',tags:['solids','gases','broad'],summary:'Relevant to combustion and flow effects. Review the actual test article, flow field, configuration and measured outcomes before comparing with another investigation.'},
+{id:'acme',name:'ACME investigations',focus:'Gaseous flames and combustion phenomena',url:'https://science.nasa.gov/biological-physical/investigations/acme/',tags:['gases','broad'],summary:'Relevant to gas-phase combustion and flame behavior. ACME investigations address different questions and should be evaluated individually; CFI-G high-oxygen tests are not solid-material flammability thresholds.'}
+];
+function rankResearch(){
+ const need=document.getElementById('siNeed').value;
+ const material=document.getElementById('siMaterial').value;
+ const mission=document.getElementById('siMission').value;
+ const question=document.getElementById('siQuestion').value.trim();
+ const scored=phoenixResearch.map(item=>{
+   let score=0, reasons=[];
+   if(item.tags.includes(need)){score+=5;reasons.push('direct topic match');}
+   if(item.tags.includes('broad')&&need==='broad'){score+=5;reasons.push('broad fire-safety relevance');}
+   if(material!=='any'&&item.tags.includes(material)){score+=3;reasons.push('selected phenomenon/material match');}
+   if(material==='any'&&item.tags.includes('broad')){score+=1;reasons.push('cross-cutting investigation');}
+   if((mission==='lunar'||mission==='mars')&&['bass','saffire','same','flex','spice','acme'].includes(item.id)){score+=1;reasons.push('potential relevance to future crewed exploration');}
+   return {...item,score,reasons};
+ }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
+ const missionLabel={habitat:'crew habitat / space station',lunar:'lunar base / pressurized rover',mars:'Mars transit / habitat'}[mission];
+ let html='<b class="ok">CURATED RELEVANCE RANKING · '+scored.length+' INVESTIGATION FAMILIES</b><p><b>Scenario:</b> '+missionLabel+'. <b>Question:</b> '+document.getElementById('siNeed').selectedOptions[0].text+'.</p>';
+ if(question) html+='<p><b>Your research question:</b> '+escapeHtml(question)+'</p>';
+ html+='<p class="small">Rank is a transparent topic-relevance score, not a scientific risk score or quality assessment. Ties are possible. All source records require manual review.</p>';
+ scored.forEach((item,index)=>{
+   html+='<div class="source"><div><b>#'+(index+1)+' · '+item.name+' <span class="pill">Relevance '+item.score+'</span></b><div class="small">'+item.focus+'</div><p>'+item.summary+'</p><div class="small">Why surfaced: '+item.reasons.join('; ')+'.</div></div><a target="_blank" rel="noopener" href="'+item.url+'">Open NASA source ↗</a></div>';
+ });
+ html+='<p><b>Next evidence checks:</b> capture experiment objective, sample/fuel and geometry, oxygen concentration and pressure, airflow/flow configuration, sensors, measured outcomes, uncertainty and source identifiers. Compare investigations only where conditions are meaningfully compatible.</p>';
+ box('siRankResult',html);
+}
+function escapeHtml(value){
+ return value.replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 }
 function interpret(){
 let q=document.getElementById('question').value;
