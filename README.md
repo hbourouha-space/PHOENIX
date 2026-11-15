@@ -78,6 +78,8 @@ Open the PHOENIX prototype: https://hbourouha-space.github.io/PHOENIX/app/
 
 The application is organized into an overview, internal fire evidence screen, BASS-II experimental comparison, external integrity screen, materials dashboard, NASA research links, scientific interpreter and engineering workflow.
 
+The NASA PSI Research and Scientific Interpreter sections include live keyword-search links that open matching investigation results directly on NASA PSI. The interpreter combines curated scientific guidance with source discovery; it does not automatically ingest records or use a connected generative-AI model. Users should verify findings against original NASA records and cite the investigation DOI where available.
+
 The BASS-II comparison panel presents a NASA-reported PMMA rod example and includes an interactive metadata compatibility check. The check flags selected differences and missing fields; it is not a predictive combustion model.
 
 ## Current Prototype Status
