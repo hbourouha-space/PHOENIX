@@ -128,10 +128,16 @@ a{color:var(--cyan)}
 <select id="iform"><option>Film</option><option>Slab</option><option>Rod</option><option>Fabric</option><option>Wire / coating</option><option>Unknown</option></select>
 <label>Oxygen condition</label>
 <select id="ioxygen"><option>Measured value available</option><option>Elevated / enriched</option><option>Nominal cabin condition</option><option>Unknown</option></select>
+<label>Material thickness</label>
+<input id="ithickness" type="text" placeholder="Enter value and units, or unknown">
+<label>Total pressure</label>
+<input id="ipressure" type="text" placeholder="Enter value and units, or unknown">
 </div>
 <div>
 <label>Airflow / ventilation</label>
 <select id="iair"><option>Measured / characterized</option><option>Low / quiescent</option><option>Forced airflow</option><option>Variable / unknown</option></select>
+<label>Ventilation configuration</label>
+<select id="ivent"><option>Known / documented</option><option>Supply and return locations known</option><option>Local flow field measured</option><option>Unknown</option></select>
 <label>Ignition evidence</label>
 <select id="iignition"><option>Known ignition source</option><option>Observed ignition</option><option>No ignition observed</option><option>Unknown</option></select>
 <label>Suppression observation</label>
@@ -255,15 +261,21 @@ let m=document.getElementById('imaterial').value;
 let f=document.getElementById('iform').value;
 let o=document.getElementById('ioxygen').value;
 let a=document.getElementById('iair').value;
+let v=document.getElementById('ivent').value;
+let t=document.getElementById('ithickness').value.trim();
+let p=document.getElementById('ipressure').value.trim();
 let g=document.getElementById('iignition').value;
 let s=document.getElementById('isuppression').value;
 let missing=[];
 if(o==='Unknown')missing.push('oxygen concentration / partial pressure');
-if(a==='Variable / unknown')missing.push('airflow and ventilation configuration');
+if(a==='Variable / unknown')missing.push('airflow characterization');
+if(v==='Unknown')missing.push('ventilation configuration');
 if(f==='Unknown')missing.push('material form and geometry');
+if(!t)missing.push('material thickness and units');
+if(!p)missing.push('total pressure and units');
 if(g==='Unknown')missing.push('ignition conditions');
 let ext=s==='Extinction verified'?'Extinction is selected as verified; retain the experimental method and criteria used to verify it.':s==='Flame displaced / blowoff only'?'Blowoff or flame displacement alone does NOT prove extinction. Check for continued reaction, reignition and secondary ignition.':s==='Reignition observed'?'Reignition was observed; do not classify the event as successful suppression.':'Suppression outcome remains unknown.';
-box('iresult','<b class="warn">QUALITATIVE EVIDENCE SCREEN — NOT A FIRE-RISK SCORE</b><p><b>Material:</b> '+m+' · <b>Form:</b> '+f+'</p><p><b>Selected conditions:</b> Oxygen: '+o+'; airflow: '+a+'; ignition: '+g+'.</p><p>'+ext+'</p><p><b>Priority data gaps:</b> '+(missing.length?missing.join('; '):'No missing fields among the selections above; confirm actual measured values and test configuration.')+'</p><p>Compare only experiments with compatible material, geometry, oxygen, pressure, airflow, ignition and apparatus conditions.</p>');
+box('iresult','<b class="warn">QUALITATIVE EVIDENCE SCREEN — NOT A FIRE-RISK SCORE</b><p><b>Material:</b> '+m+' · <b>Form:</b> '+f+'</p><p><b>Selected conditions:</b> Oxygen: '+o+'; airflow: '+a+'; ventilation: '+v+'; thickness: '+(t||'not entered')+'; total pressure: '+(p||'not entered')+'; ignition: '+g+'.</p><p>'+ext+'</p><p><b>Priority data gaps:</b> '+(missing.length?missing.join('; '):'No missing fields among the selections above; confirm actual measured values and test configuration.')+'</p><p>Compare only experiments with compatible material, geometry, oxygen, pressure, airflow, ignition and apparatus conditions.</p>');
 }
 function screenExternal(){
 let m=document.getElementById('tps').value;
