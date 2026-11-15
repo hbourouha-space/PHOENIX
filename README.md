@@ -1,5 +1,4 @@
-# PHOENIX
-An AI-powered spaceflight fire safety research platform connecting NASA combustion science data with intelligent analysis for crew protection
+
 # PHOENIX
 ### Proactive Hazard Observation, Isolation and Extinction Network for eXtreme Environments
 
