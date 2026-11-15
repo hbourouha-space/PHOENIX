@@ -12,7 +12,7 @@ NASA has conducted numerous combustion investigations in space. However, locatin
 
 ## Our Solution
 
-PHOENIX is an AI-powered research and engineering decision-support concept designed to organize NASA combustion science and translate experimental evidence into insights relevant to spacecraft fire safety.
+PHOENIX is a research and engineering decision-support prototype designed to organize NASA combustion science and translate experimental evidence into insights relevant to spacecraft fire safety. AI-assisted interpretation is part of the intended architecture, but a generative-AI model is not connected in the current prototype.
 
 It focuses on three interconnected priorities:
 
@@ -29,9 +29,9 @@ Featured investigations include:
 - **BASS-II:** Solid-fuel ignition, flame spread and extinction in microgravity.
 - **SAFFIRE-I:** Spacecraft-scale fire behavior and combustion measurements.
 - **SAME-R:** Smoke aerosol characteristics and detector response.
-- **SPICE:** Non-buoyant jet diffusion flame research.
+- **SPICE:** Solid- and gaseous-fuel combustion research in a fan-driven duct configuration; review each test's fuel, geometry and flow conditions.
 - **ACME:** Combustion experiments aboard the International Space Station.
-- **FLEX:** Liquid-fuel droplet combustion and extinction research.
+- **FLEX:** Flame-extinguishment research examining CO₂ and helium dilution. Do not conflate it with separate droplet-combustion investigations.
 
 NASA source: https://psi.nasa.gov/physci/repo/
 
@@ -67,10 +67,10 @@ The intended architecture combines:
 - NASA research discovery and source traceability
 - Structured experimental metadata
 - Scientific comparison and engineering analysis
-- An AI scientific interpreter grounded in retrieved research
+- A planned AI scientific interpreter grounded in retrieved research (not connected in this prototype)
 - Mission-oriented research applications
 
-**Physics models calculate. AI interprets. PHOENIX explains the evidence.**
+**Physics models calculate. Research tools organize. AI-assisted interpretation is a future development direction. PHOENIX makes the evidence easier to examine.**
 
 ## Live Demonstration
 
@@ -96,7 +96,7 @@ PHOENIX is a research prototype, not a certified spacecraft fire-safety system.
 - Unknown measurements must remain unknown.
 - Results from gaseous flames, liquid droplets and solid materials must not be treated as interchangeable.
 - Blowoff must not automatically be interpreted as extinction.
-- AI-generated interpretations must be traceable to original scientific evidence.
+- Any future AI-generated interpretations must be traceable to original scientific evidence.
 - Mission-specific safety decisions require validated engineering models and qualified review.
 
 ## Project Repository
