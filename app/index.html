@@ -2,126 +2,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PHOENIX | Spaceflight Fire Intelligence</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PHOENIX | Spaceflight Fire & Integrity Intelligence</title>
 <style>
-:root{--bg:#091321;--panel:#122238;--line:#29415b;--text:#edf4fc;--muted:#a7b8ca;--cyan:#55d6e8;--gold:#f0bd69}
+:root{--bg:#07182a;--navy:#0c2340;--panel:#102d4b;--panel2:#163a5b;--line:#315574;--white:#f5f9ff;--muted:#c2d2e2;--cyan:#58d6e8;--gold:#ffc36b;--red:#ff8585;--green:#79ddb0}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:15px Arial,sans-serif}
-header{padding:25px 6%;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.brand{font-size:27px;font-weight:800;letter-spacing:3px}
+body{margin:0;background:var(--bg);color:var(--white);font:15px/1.55 Arial,sans-serif}
+header{background:#061426;border-bottom:1px solid var(--line);padding:20px max(20px,calc((100% - 1180px)/2))}
+.head{max-width:1180px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:3px;font-size:25px}
 .brand span{color:var(--cyan)}
-.tag{color:var(--muted);font-size:12px;letter-spacing:1px;margin-top:6px}
-.status{border:1px solid #397c72;color:#80dfbd;border-radius:20px;padding:8px 12px;font-size:12px}
-main{max-width:1150px;margin:auto;padding:35px 22px}
-.hero{padding:32px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(120deg,#142b43,#102033)}
-.eyebrow{color:var(--cyan);font-size:12px;letter-spacing:2px;font-weight:bold}
-h1{font-size:clamp(30px,5vw,48px);margin:15px 0}
-p{line-height:1.6;color:var(--muted)}
-h2{font-size:21px;margin:32px 0 14px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:22px}
-.stat,.card,.workspace{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
-.stat strong{display:block;font-size:25px;color:var(--cyan);margin-bottom:5px}
-.stat small{color:var(--muted)}
-.tools{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
-input,select,button{font:inherit;border-radius:8px;padding:12px;border:1px solid var(--line)}
-input,select{background:#0b1929;color:var(--text);flex:1;min-width:190px}
-button{background:#17445a;color:white;cursor:pointer}
-button:hover{background:#21627a}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.card h3{margin:8px 0;color:#fff}
-.card p{font-size:14px}
-.card a{color:var(--cyan);text-decoration:none}
-.pill{font-size:11px;color:var(--gold);letter-spacing:1px}
-.workspace{margin-top:25px}
-.answer{white-space:pre-wrap;background:#0b1929;border-radius:9px;padding:16px;margin-top:14px;min-height:90px;color:#d7e8f4;line-height:1.6}
-footer{border-top:1px solid var(--line);padding:25px 6%;color:var(--muted);font-size:12px}
+.sub{font-size:11px;letter-spacing:2px;color:var(--muted)}
+.status{border:1px solid #3a8c80;border-radius:30px;padding:6px 12px;color:var(--green);font-size:12px}
+main{max-width:1180px;margin:24px auto;padding:0 18px 45px}
+.hero,.panel,.card{background:var(--panel);border:1px solid var(--line);border-radius:13px}
+.hero{padding:24px;margin-bottom:18px;background:linear-gradient(120deg,#102c4a,#16466a)}
+.eyebrow{color:var(--cyan);font-size:11px;font-weight:bold;letter-spacing:2px}
+.hero h1{font-size:clamp(25px,4vw,38px);line-height:1.15;margin:9px 0}
+.hero p{color:#d8e7f4;max-width:850px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.metric{background:#0b2037;border:1px solid var(--line);padding:12px;border-radius:9px}
+.metric b{display:block;color:var(--cyan);font-size:21px}
+.nav{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0}
+.nav button,button{cursor:pointer;border:1px solid #49718e;background:#17466a;color:white;border-radius:8px;padding:10px 13px;font-weight:bold}
+.nav button.active,button.primary{background:#087b9c;border-color:#55cce0}
+.view{display:none}
+.view.active{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.panel{padding:18px;margin-bottom:14px}
+.panel h2{font-size:19px;margin:0 0 10px}
+.panel h3{font-size:16px;margin:0 0 7px;color:#dff7ff}
+.muted{color:var(--muted)}
+.small{font-size:12px;color:var(--muted)}
+label{display:block;font-size:13px;font-weight:bold;margin:11px 0 5px}
+input,select,textarea{width:100%;background:#081d32;color:white;border:1px solid #52728c;border-radius:7px;padding:10px;font:inherit}
+textarea{min-height:70px}
+button{margin-top:12px}
+.result{display:none;background:#0a2036;border:1px solid #426580;border-radius:9px;padding:14px;margin-top:14px}
+.result.show{display:block}
+.pill{display:inline-block;font-size:10px;letter-spacing:.5px;border:1px solid #52728c;border-radius:30px;padding:4px 8px;color:#bfeefa;margin:2px}
+.warn{color:var(--gold)}
+.danger{color:var(--red)}
+.ok{color:var(--green)}
+.materials{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.material{background:#0b2037;border:1px solid var(--line);border-radius:9px;padding:13px}
+.material p{font-size:13px;margin:5px 0;color:var(--muted)}
+.source{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:11px 0}
+.source:last-child{border:0}
+.source a{color:var(--cyan);font-weight:bold}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.step{background:#0a2036;border:1px solid var(--line);padding:12px;border-radius:9px;font-size:12px}
+.step b{display:block;color:var(--cyan);margin-bottom:5px}
+.note{border-left:4px solid var(--gold);padding:11px 13px;background:#0a2036;color:#d9e5ef;border-radius:5px;font-size:13px;margin-top:12px}
+footer{text-align:center;color:#9fb5c9;font-size:12px;padding:22px;border-top:1px solid var(--line)}
+a{color:var(--cyan)}
+@media(max-width:760px){.grid,.metrics,.materials{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.hero{padding:18px}}
 </style>
 </head>
 <body>
 <header>
- <div><div class="brand">PHOENI<span>X</span></div><div class="tag">SPACEFLIGHT FIRE INTELLIGENCE</div></div>
- <div class="status">● RESEARCH PROTOTYPE</div>
+<div class="head">
+<div><div class="brand">PHOENI<span>X</span></div><div class="sub">SPACEFLIGHT FIRE & INTEGRITY INTELLIGENCE</div></div>
+<div class="status">● RESEARCH PROTOTYPE · HUMAN REVIEW REQUIRED</div>
+</div>
 </header>
 <main>
 <section class="hero">
- <div class="eyebrow">DETECT EARLY · ASSESS THE RISK · PROTECT THE CREW</div>
- <h1>Turning combustion science into crew protection.</h1>
- <p>PHOENIX is an evidence-centered research platform designed to help engineers explore NASA combustion investigations, compare fire behavior, and identify knowledge gaps relevant to spacecraft and future exploration habitats.</p>
- <div class="stats">
-  <div class="stat"><strong>NASA PSI</strong><small>Primary research source</small></div>
-  <div class="stat"><strong>6</strong><small>Featured investigation families</small></div>
-  <div class="stat"><strong>3</strong><small>Research priorities: prevention, detection, suppression</small></div>
- </div>
+<div class="eyebrow">DETECT EARLY · ASSESS THE EVIDENCE · PROTECT THE CREW</div>
+<h1>Turning NASA research into engineering insight.</h1>
+<p>PHOENIX organizes space-combustion research and separates two different engineering problems: fire hazards inside a pressurized vehicle and external thermal-protection-system integrity.</p>
+<div class="metrics">
+<div class="metric"><b>2</b>distinct intelligence domains</div>
+<div class="metric"><b>6</b>featured research families</div>
+<div class="metric"><b>1</b>evidence-to-decision workflow</div>
+</div>
+</section>
+<nav class="nav">
+<button class="active" onclick="show('overview',this)">Overview</button>
+<button onclick="show('internal',this)">Internal Fire Engine</button>
+<button onclick="show('external',this)">External Integrity Engine</button>
+<button onclick="show('materials',this)">Materials Dashboard</button>
+<button onclick="show('research',this)">NASA PSI Research</button>
+<button onclick="show('interpreter',this)">Scientific Interpreter</button>
+<button onclick="show('workflow',this)">Engineering Workflow</button>
+</nav>
+
+<section id="overview" class="view active">
+<div class="grid">
+<article class="panel">
+<h2>01 · Internal Fire Intelligence</h2>
+<p>Evidence-led screening of ignition and flame behavior in cabin materials. Relevant variables include material identity, form and thickness, oxygen concentration or partial pressure, total pressure, airflow, ignition conditions and ventilation configuration.</p>
+<span class="pill">Cabin polymers</span><span class="pill">Fabrics</span><span class="pill">Wires & insulation</span><span class="pill">Smoke & suppression</span>
+</article>
+<article class="panel">
+<h2>02 · External Integrity Intelligence</h2>
+<p>A separate evidence workflow for thermal-protection materials, impact damage, cracks, erosion, attachment and inspection evidence. It does not reuse cabin flame-spread logic or predict re-entry safety.</p>
+<span class="pill">TPS tiles</span><span class="pill">RCC</span><span class="pill">Flexible blankets</span><span class="pill">Impact & defects</span>
+</article>
+</div>
+<div class="panel">
+<h2>PHOENIX decision principle</h2>
+<div class="steps">
+<div class="step"><b>1 · DATA</b>NASA experiments and source records</div>
+<div class="step"><b>2 · PHYSICS</b>Compare like with like; preserve test conditions</div>
+<div class="step"><b>3 · INTERPRET</b>Identify patterns, limits and unknowns</div>
+<div class="step"><b>4 · RECOMMEND</b>Evidence-based options and trade-offs</div>
+<div class="step"><b>5 · HUMAN DECISION</b>Engineers review and decide</div>
+</div>
+<div class="note">DATA INFORMS. PHYSICS VALIDATES. AI INTERPRETS. ENGINEERING RECOMMENDS. HUMANS DECIDE.</div>
+</div>
 </section>
 
-<h2>NASA combustion research catalogue</h2>
-<p>Explore selected NASA investigations. Follow each source link to the original research record. The catalogue is a curated starting point, not a complete mirror of NASA's archive.</p>
-<div class="tools">
- <input id="search" placeholder="Search investigations, materials or phenomena..." oninput="render()">
- <select id="filter" onchange="render()">
-  <option value="all">All research areas</option>
-  <option value="Fire growth">Fire growth and spread</option>
-  <option value="Smoke">Smoke and detection</option>
-  <option value="Flames">Flame behavior</option>
-  <option value="Droplets">Droplet combustion</option>
- </select>
-</div>
-<div class="grid" id="catalogue"></div>
-
-<h2>PHOENIX scientific interpreter</h2>
-<div class="workspace">
- <div class="eyebrow">EVIDENCE-BASED RESEARCH WORKSPACE</div>
- <p>Choose a research question to see the evidence considerations PHOENIX should investigate. This initial version is a guided prototype, not a connected generative AI service.</p>
- <select id="question">
-  <option value="material">How could cabin material affect fire propagation?</option>
-  <option value="oxygen">How does oxygen concentration affect fire risk?</option>
-  <option value="smoke">What research informs smoke detection?</option>
-  <option value="suppression">How should extinguishment be evaluated?</option>
- </select>
- <button onclick="interpret()">Analyze research question</button>
- <div class="answer" id="answer">Select a question and choose Analyze to see the scientific evidence checklist.</div>
-</div>
-
-<h2>Engineering principles</h2>
+<section id="internal" class="view">
+<div class="panel">
+<h2>Internal Fire Intelligence Engine</h2>
+<p class="muted">Qualitative evidence-screening demonstration. It does not calculate a validated probability of ignition, flame spread or extinction.</p>
 <div class="grid">
- <div class="card"><div class="pill">01 · PREVENTION</div><h3>Understand ignition</h3><p>Evaluate material identity, geometry, ignition conditions, oxygen environment and local airflow.</p></div>
- <div class="card"><div class="pill">02 · DETECTION</div><h3>Recognize early signals</h3><p>Investigate smoke, temperature, gas concentrations, optical signals and sensor response.</p></div>
- <div class="card"><div class="pill">03 · SUPPRESSION</div><h3>Verify extinction</h3><p>Distinguish true extinction from flame displacement or blowoff. Consider reignition and secondary ignition.</p></div>
+<div>
+<label>Material family</label>
+<select id="imaterial"><option>PMMA / acrylic</option><option>Polymer film or slab</option><option>Nomex / aramid fabric</option><option>SIBAL composite fabric</option><option>Wire insulation</option><option>Other / unknown</option></select>
+<label>Material form / geometry</label>
+<select id="iform"><option>Film</option><option>Slab</option><option>Rod</option><option>Fabric</option><option>Wire / coating</option><option>Unknown</option></select>
+<label>Oxygen condition</label>
+<select id="ioxygen"><option>Measured value available</option><option>Elevated / enriched</option><option>Nominal cabin condition</option><option>Unknown</option></select>
 </div>
-<div class="workspace">
- <div class="eyebrow">SCIENTIFIC INTEGRITY</div>
- <p>Different materials and geometries can behave differently. PHOENIX must not apply one generic flame-spread or suppression model to all cabin materials. Unknown measurements must remain unknown. A simulated scenario is not a validated spacecraft safety assessment.</p>
+<div>
+<label>Airflow / ventilation</label>
+<select id="iair"><option>Measured / characterized</option><option>Low / quiescent</option><option>Forced airflow</option><option>Variable / unknown</option></select>
+<label>Ignition evidence</label>
+<select id="iignition"><option>Known ignition source</option><option>Observed ignition</option><option>No ignition observed</option><option>Unknown</option></select>
+<label>Suppression observation</label>
+<select id="isuppression"><option>Extinction verified</option><option>Flame displaced / blowoff only</option><option>Reignition observed</option><option>Not tested / unknown</option></select>
 </div>
+</div>
+<button class="primary" onclick="screenInternal()">Screen evidence conditions</button>
+<div id="iresult" class="result"></div>
+<div class="note">Material-specific rule: do not combine PMMA films, slabs and rods—or unrelated fabrics and insulation—into one generic flame model. Blowoff is not proof of extinction; verify extinction and check for reignition.</div>
+</div>
+</section>
+
+<section id="external" class="view">
+<div class="panel">
+<h2>External Integrity Intelligence Engine</h2>
+<p class="muted">A structured inspection-evidence screen for external thermal-protection systems, separate from internal cabin fire analysis.</p>
+<div class="grid">
+<div>
+<label>Material / system</label>
+<select id="tps"><option>Silica tile</option><option>Reinforced carbon-carbon (RCC)</option><option>Flexible insulation blanket</option><option>Ablative heat shield</option><option>Unknown</option></select>
+<label>Observed condition</label>
+<select id="damage"><option>Impact / strike</option><option>Crack / fracture</option><option>Erosion / recession</option><option>Bond / attachment concern</option><option>Unknown</option></select>
+</div>
+<div>
+<label>Inspection evidence</label>
+<select id="inspect"><option>No inspection evidence yet</option><option>Photograph / visual inspection</option><option>Non-destructive evaluation</option><option>Engineering assessment available</option></select>
+<label>Damage location</label>
+<select id="loc"><option>Localized</option><option>Not localized / unknown</option></select>
+</div>
+</div>
+<button class="primary" onclick="screenExternal()">Generate inspection priorities</button>
+<div id="eresult" class="result"></div>
+<div class="note">An impact does not by itself establish loss of thermal protection. Characterize location, dimensions, depth, interfaces, underlying structure and configuration-specific acceptance criteria.</div>
+</div>
+</section>
+
+<section id="materials" class="view">
+<div class="panel">
+<h2>Materials Intelligence Dashboard</h2>
+<p class="muted">Material records are separated by the physical problem they inform. These are evidence categories to populate—not universal material ratings.</p>
+<h3>Internal cabin materials</h3>
+<div class="materials">
+<div class="material"><b>PMMA / acrylic</b><p>Track film, slab and rod geometry separately; capture thickness, ignition, oxygen, pressure, airflow and flame observations.</p><span class="pill">BASS / BASS-II relevance</span></div>
+<div class="material"><b>Nomex / aramid fabric</b><p>Record weave, areal density, orientation, layering, ignition and test atmosphere.</p><span class="pill">Material-specific tests</span></div>
+<div class="material"><b>SIBAL composite fabric</b><p>Record composite construction, thickness, orientation, seams and observed combustion behavior.</p><span class="pill">Configuration required</span></div>
+<div class="material"><b>Wire & polymer insulation</b><p>Capture polymer identity, wire gauge, coating thickness, routing, airflow and ignition source.</p><span class="pill">Further source review</span></div>
+</div>
+<h3 style="margin-top:20px">External thermal-protection materials</h3>
+<div class="materials">
+<div class="material"><b>Silica tiles</b><p>Track tile type, thickness, coating, bond, gap, location and inspection evidence.</p><span class="pill">TPS integrity</span></div>
+<div class="material"><b>RCC / carbon-based structures</b><p>Track panel location, coating, impact site, crack geometry and subsurface inspection.</p><span class="pill">TPS integrity</span></div>
+<div class="material"><b>Flexible insulation blankets</b><p>Track blanket construction, seams, attachments, gaps and local damage.</p><span class="pill">TPS integrity</span></div>
+<div class="material"><b>Ablative systems</b><p>Track formulation, char, recession, remaining thickness and heat-load context.</p><span class="pill">System-specific</span></div>
+</div>
+</div>
+</section>
+
+<section id="research" class="view">
+<div class="panel">
+<h2>NASA Physical Sciences Informatics (PSI) research</h2>
+<p class="muted">NASA PSI is the primary research source. The links below open selected investigation records; this prototype does not yet make live API calls, download datasets, or automatically ingest repository files.</p>
+<div class="source"><div><b>SAFFIRE-I · PSI-98</b><div class="small">Spacecraft fire experiments</div></div><a target="_blank" rel="noopener" href="https://psi.nasa.gov/physci/repo/data/investigations/PSI-98">Open NASA record ↗</a></div>
+<div class="source"><div><b>BASS-II · PSI-25</b><div class="small">Flame behavior in microgravity; review individual material and test conditions</div></div><a target="_blank" rel="noopener" href="https://psi.nasa.gov/physci/repo/data/investigations/PSI-25">Open NASA record ↗</a></div>
+<div class="source"><div><b>SAME-R · PSI-101</b><div class="small">Smoke and aerosol-related research</div></div><a target="_blank" rel="noopener" href="https://psi.nasa.gov/physci/repo/data/investigations/PSI-101">Open NASA record ↗</a></div>
+<div class="source"><div><b>SPICE · PSI-107</b><div class="small">Combustion research</div></div><a target="_blank" rel="noopener" href="https://psi.nasa.gov/physci/repo/data/investigations/PSI-107">Open NASA record ↗</a></div>
+<div class="source"><div><b>FLEX · PSI-69</b><div class="small">Flame-extinguishment experiments</div></div><a target="_blank" rel="noopener" href="https://psi.nasa.gov/physci/repo/data/investigations/PSI-69">Open NASA record ↗</a></div>
+<div class="source"><div><b>ACME investigations</b><div class="small">Advanced Combustion via Microgravity Experiments</div></div><a target="_blank" rel="noopener" href="https://science.nasa.gov/biological-physical/investigations/acme/">Open NASA overview ↗</a></div>
+<div class="note">Repository status: curated direct links only. A live PSI connector, dataset retrieval and automated parsing are future implementation work. Always inspect original NASA metadata and files before drawing conclusions.</div>
+</div>
+</section>
+
+<section id="interpreter" class="view">
+<div class="panel">
+<h2>PHOENIX Scientific Interpreter</h2>
+<p class="muted">A curated prototype guide—not a connected generative-AI service. Choose a question to see a prepared scientific interpretation and the evidence needed next.</p>
+<label>What do you want to investigate?</label>
+<select id="question">
+<option value="material">How should I compare fire behavior across materials?</option>
+<option value="extinction">Does flame blowoff prove extinction?</option>
+<option value="oxygen">Why must oxygen and airflow be recorded?</option>
+<option value="impact">Does TPS impact damage prove re-entry failure?</option>
+<option value="recommend">How should evidence become an engineering recommendation?</option>
+</select>
+<button class="primary" onclick="interpret()">Interpret research question</button>
+<div id="airesult" class="result"></div>
+<div class="note">AI integration status: no external model or API is connected in this version. Responses are authored guidance. A future AI connection must retrieve cited PSI evidence, expose uncertainty and avoid unsupported predictions.</div>
+</div>
+</section>
+
+<section id="workflow" class="view">
+<div class="panel">
+<h2>From NASA evidence to engineering decision</h2>
+<div class="steps">
+<div class="step"><b>01 · DATA</b>Retrieve original experiment, metadata, files and material description.</div>
+<div class="step"><b>02 · CONTEXT</b>Check material, geometry, oxygen, pressure, airflow, ignition and test setup.</div>
+<div class="step"><b>03 · INTERPRET</b>Compare compatible tests; report patterns, uncertainty and missing evidence.</div>
+<div class="step"><b>04 · OPTIONS</b>Present mitigation options, trade-offs, confidence and unresolved questions.</div>
+<div class="step"><b>05 · REVIEW</b>Qualified engineers evaluate evidence and make the decision.</div>
+</div>
+<div class="note">PHOENIX is a research and decision-support prototype. It is not NASA-certified, does not connect to spacecraft sensors, and does not make operational safety decisions.</div>
+</div>
+</section>
 </main>
-<footer>PHOENIX · NASA combustion science research interface · Prototype version 1.0<br>Research source: NASA Physical Sciences Informatics (PSI). PHOENIX is an independent research prototype, not a NASA-certified safety system.</footer>
+<footer>PHOENIX · NASA combustion and spacecraft-integrity research interface · Prototype demonstration<br>Research source: NASA Physical Sciences Informatics (PSI). PHOENIX is an independent research prototype, not a NASA-certified safety system.</footer>
+
 <script>
-const studies=[
-{name:"SAFFIRE-I",area:"Fire growth",detail:"Spacecraft fire growth and behavior in a large-scale vehicle environment. Includes imagery and measurements relevant to flame spread and combustion products.",source:"https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",doi:"10.60555/0t15-1z43"},
-{name:"BASS-II",area:"Fire growth",detail:"Solid-fuel ignition, flame spread and extinction under low-velocity forced flow in microgravity. Material and geometry matter.",source:"https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",doi:"10.60555/4qc4-de67"},
-{name:"SAME-R",area:"Smoke",detail:"Smoke aerosol particle-size distributions and smoke detector response in microgravity.",source:"https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",doi:"10.60555/2np7-jv14"},
-{name:"SPICE",area:"Flames",detail:"Non-buoyant jet diffusion flames. Relevant to flame structure, flame length and smoke-point research.",source:"https://psi.nasa.gov/physci/repo/data/investigations/PSI-107",doi:"10.60555/9kbh-e962"},
-{name:"ACME",area:"Flames",detail:"Combustion experiments in the Combustion Integrated Rack, including flame structure, soot, stability and extinction studies.",source:"https://science.nasa.gov/biological-physical/investigations/acme/",doi:"NASA Science investigation portal"},
-{name:"FLEX",area:"Droplets",detail:"Liquid-fuel droplet combustion, burning behavior, extinction and inert-gas effects.",source:"https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",doi:"10.60555/mbq8-0451"}
-];
-function render(){
- const q=document.getElementById("search").value.toLowerCase();
- const f=document.getElementById("filter").value;
- const found=studies.filter(s=>(f==="all"||s.area===f)&&(s.name+" "+s.area+" "+s.detail).toLowerCase().includes(q));
- document.getElementById("catalogue").innerHTML=found.map(s=>`<article class="card"><div class="pill">${s.area.toUpperCase()}</div><h3>${s.name}</h3><p>${s.detail}</p><p><small>Record identifier: ${s.doi}</small></p><a href="${s.source}" target="_blank" rel="noopener">Open NASA research source ↗</a></article>`).join("")||"<p>No matching investigations found.</p>";
+function show(id,btn){
+document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+btn.classList.add('active');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+function box(id,html){
+let e=document.getElementById(id);
+e.innerHTML=html;
+e.classList.add('show');
+}
+function screenInternal(){
+let m=document.getElementById('imaterial').value;
+let f=document.getElementById('iform').value;
+let o=document.getElementById('ioxygen').value;
+let a=document.getElementById('iair').value;
+let g=document.getElementById('iignition').value;
+let s=document.getElementById('isuppression').value;
+let missing=[];
+if(o==='Unknown')missing.push('oxygen concentration / partial pressure');
+if(a==='Variable / unknown')missing.push('airflow and ventilation configuration');
+if(f==='Unknown')missing.push('material form and geometry');
+if(g==='Unknown')missing.push('ignition conditions');
+let ext=s==='Extinction verified'?'Extinction is selected as verified; retain the experimental method and criteria used to verify it.':s==='Flame displaced / blowoff only'?'Blowoff or flame displacement alone does NOT prove extinction. Check for continued reaction, reignition and secondary ignition.':s==='Reignition observed'?'Reignition was observed; do not classify the event as successful suppression.':'Suppression outcome remains unknown.';
+box('iresult','<b class="warn">QUALITATIVE EVIDENCE SCREEN — NOT A FIRE-RISK SCORE</b><p><b>Material:</b> '+m+' · <b>Form:</b> '+f+'</p><p><b>Selected conditions:</b> Oxygen: '+o+'; airflow: '+a+'; ignition: '+g+'.</p><p>'+ext+'</p><p><b>Priority data gaps:</b> '+(missing.length?missing.join('; '):'No missing fields among the selections above; confirm actual measured values and test configuration.')+'</p><p>Compare only experiments with compatible material, geometry, oxygen, pressure, airflow, ignition and apparatus conditions.</p>');
+}
+function screenExternal(){
+let m=document.getElementById('tps').value;
+let d=document.getElementById('damage').value;
+let i=document.getElementById('inspect').value;
+let l=document.getElementById('loc').value;
+let action=d==='Impact / strike'?'Characterize impact location, dimensions, depth, possible subsurface damage and affected interfaces.':d==='Crack / fracture'?'Measure crack length, width, depth, orientation and relation to underlying structure.':d==='Erosion / recession'?'Measure material loss and remaining thickness; identify the cause and applicable allowable limits.':d==='Bond / attachment concern'?'Inspect bond lines, gaps, seams, fasteners and adjacent structure.':'Identify and document the condition before drawing conclusions.';
+box('eresult','<b class="warn">ENGINEERING INSPECTION REVIEW REQUIRED</b><p><b>System:</b> '+m+' · <b>Observation:</b> '+d+'</p><p>'+action+'</p><p><b>Evidence level:</b> '+i+'. '+(l==='Not localized / unknown'?'Damage location is not localized; localization is a priority.':'Location is selected as localized; record coordinates and configuration.')+'</p><p>An observed defect does not alone establish loss of thermal protection or re-entry failure. Compare findings with vehicle-specific engineering criteria.</p>');
 }
 function interpret(){
- const q=document.getElementById("question").value;
- const answers={
- material:"MATERIAL-SPECIFIC REVIEW\n\nIdentify the exact material, thickness, shape and orientation. Compare relevant solid-fuel evidence such as BASS-II and SAFFIRE. Examine ignition source, oxygen concentration, pressure, airflow and ventilation. Do not transfer results between materials without supporting evidence.\n\nEvidence needed: material identity, geometry, ignition conditions, flame observations and measurement uncertainty.",
- oxygen:"OXYGEN-ENVIRONMENT REVIEW\n\nOxygen concentration and partial pressure can influence ignition and combustion behavior. Compare experiments only when pressure, fuel, flow and test configuration are understood. A result from a gaseous flame experiment is not automatically evidence for solid cabin materials.\n\nEvidence needed: oxygen fraction, total pressure, fuel, flow and experimental configuration.",
- smoke:"SMOKE-DETECTION REVIEW\n\nSAME-R is relevant to smoke aerosol characteristics and detector response in microgravity. Consider particle-size distribution, detector type, placement, airflow and background aerosols.\n\nEvidence needed: aerosol properties, detector response, test conditions and false-alarm limitations.",
- suppression:"SUPPRESSION-VERIFICATION REVIEW\n\nDistinguish extinction from flame displacement or blowoff. Determine whether combustion actually stopped, whether reignition occurred, and whether unburned fuel or hot surfaces could cause secondary ignition.\n\nEvidence needed: time-resolved flame observations, gas measurements, oxygen conditions, flow and post-event monitoring."
- };
- document.getElementById("answer").textContent=answers[q]+"\n\nPrototype guidance only. Consult original NASA records before making engineering decisions.";
+let q=document.getElementById('question').value;
+let answers={
+material:'Do not treat materials as interchangeable. Compare like material families and preserve form, thickness, orientation, geometry, oxygen, pressure, airflow, ignition and apparatus details. If these differ, report the comparison as limited rather than ranking materials with one generic score.',
+extinction:'No. Flame blowoff or displacement can occur without true extinction. Verify that combustion has ceased, check for reignition and secondary ignition, and document the test method and observation window.',
+oxygen:'Oxygen concentration and partial pressure affect combustion, while airflow and ventilation affect flame shape, heat and oxidizer transport, and smoke movement. Record the actual test conditions rather than relying on a generic label such as normal or elevated.',
+impact:'No. An impact can produce surface or hidden damage, but the consequence depends on material, location, depth, interfaces, vehicle configuration and inspection evidence. The next step is characterization against approved system-specific limits—not an unsupported failure prediction.',
+recommend:'Trace every recommendation to source experiments and test conditions. Present the evidence, applicability, uncertainty, possible options, trade-offs, confidence and missing data. Qualified engineers review and decide; PHOENIX does not issue operational safety approval.'
+};
+box('airesult','<b class="ok">CURATED SCIENTIFIC GUIDANCE</b><p>'+answers[q]+'</p><p><b>Next step:</b> open the relevant NASA PSI investigation record, inspect original files and metadata, and document the source supporting any conclusion.</p>');
 }
-render();
 </script>
 </body>
 </html>
