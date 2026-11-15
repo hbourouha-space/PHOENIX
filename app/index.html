@@ -25,9 +25,15 @@ main{max-width:1180px;margin:24px auto;padding:0 18px 45px}
 .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
 .metric{background:#0b2037;border:1px solid var(--line);padding:12px;border-radius:9px}
 .metric b{display:block;color:var(--cyan);font-size:21px}
-.nav{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0}
-.nav button,button{cursor:pointer;border:1px solid #49718e;background:#17466a;color:white;border-radius:8px;padding:10px 13px;font-weight:bold}
+.nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:18px 0}
+.nav button,button{cursor:pointer;border:1px solid #49718e;background:#17466a;color:white;border-radius:8px;padding:11px 12px;font-weight:bold;transition:background .15s ease,border-color .15s ease}
+.nav button{margin:0;min-height:44px}
+.nav button:hover,button:hover{background:#20577f;border-color:#65a0c2}
 .nav button.active,button.primary{background:#087b9c;border-color:#55cce0}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+@media(max-width:900px){.nav{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.nav{grid-template-columns:1fr}.nav button{text-align:left}}
+
 .view{display:none}
 .view.active{display:block}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
