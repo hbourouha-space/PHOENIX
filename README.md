@@ -76,15 +76,15 @@ The intended architecture combines:
 
 Open the PHOENIX prototype: https://hbourouha-space.github.io/PHOENIX/app/
 
-The application is organized into an overview, internal fire evidence screen, BASS-II experimental comparison, external integrity screen, materials dashboard, NASA research links, scientific interpreter and engineering workflow.
+The application is organized into an overview, internal fire evidence screen, BASS-II experimental comparison, external integrity screen, materials dashboard, NASA research links, curated scientific interpreter, an interactive SI Research Dashboard and engineering workflow.
 
-The NASA PSI Research and Scientific Interpreter sections include live keyword-search links that open matching investigation results directly on NASA PSI. The interpreter combines curated scientific guidance with source discovery; it does not automatically ingest records or use a connected generative-AI model. Users should verify findings against original NASA records and cite the investigation DOI where available.
+The NASA PSI Research and Scientific Interpreter sections include keyword-search links that open matching investigation results directly on NASA PSI. The SI Research Dashboard provides transparent, rule-based relevance ranking across curated investigation families based on the selected mission environment and fire-safety question. Its scores indicate topic relevance only—not experimental quality, material safety, flammability or mission risk. The prototype does not automatically ingest PSI records or use a connected generative-AI model. Users should verify findings against original NASA records and cite the investigation DOI where available.
 
 The BASS-II comparison panel presents a NASA-reported PMMA rod example and includes an interactive metadata compatibility check. The check flags selected differences and missing fields; it is not a predictive combustion model.
 
 ## Current Prototype Status
 
-The current GitHub prototype includes an interactive research catalogue, investigation links, guided scientific interpretation prompts and engineering principles.
+The current GitHub prototype includes an interactive research catalogue, investigation links, guided scientific interpretation prompts, a curated rule-based relevance-ranking dashboard and engineering principles.
 
 The live NASA repository connection and generative AI backend remain development objectives and are not represented as operational features in this version.
 
