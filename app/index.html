@@ -65,6 +65,68 @@ button{margin-top:12px}
 footer{text-align:center;color:#9fb5c9;font-size:12px;padding:22px;border-top:1px solid var(--line)}
 a{color:var(--cyan)}
 @media(max-width:760px){.grid,.metrics,.materials{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.hero{padding:18px}}
+
+/* PHOENIX mission-console visual layer */
+:root{
+ --bg:#050d1b;--navy:#091a32;--panel:rgba(12,31,57,.88);--panel2:#10294a;
+ --line:rgba(105,164,226,.28);--white:#f4f8ff;--muted:#b8c9df;
+ --cyan:#78baff;--gold:#9fcaff;--red:#a9c9f2;--green:#8dbcf0;
+}
+html{scroll-behavior:smooth}
+body{
+ background:
+  radial-gradient(ellipse at 15% 0%,rgba(30,94,164,.22),transparent 38%),
+  radial-gradient(ellipse at 92% 18%,rgba(30,75,135,.16),transparent 32%),
+  linear-gradient(rgba(76,130,190,.045) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(76,130,190,.045) 1px,transparent 1px),var(--bg);
+ background-size:auto,auto,34px 34px,34px 34px,auto;
+ letter-spacing:.12px;
+}
+header{
+ position:relative;background:linear-gradient(110deg,rgba(4,13,28,.98),rgba(9,29,55,.96));
+ border-bottom:1px solid rgba(111,177,245,.38);
+ box-shadow:0 10px 35px rgba(0,0,0,.28);
+}
+header:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,#5daaff,transparent);opacity:.75}
+.brand{font-size:28px;letter-spacing:4px;text-shadow:0 0 22px rgba(91,166,255,.28)}
+.brand span{color:#8fc4ff}
+.sub{color:#a9c7e8}
+.acronym{color:#dceaff}
+.status{border-color:rgba(126,184,245,.55);background:rgba(53,105,166,.13);color:#c9e2ff;box-shadow:inset 0 0 18px rgba(87,157,230,.08)}
+main{max-width:1240px}
+.hero,.panel,.card{border-color:rgba(112,169,226,.27);box-shadow:0 12px 32px rgba(0,0,0,.19),inset 0 1px rgba(255,255,255,.035);backdrop-filter:blur(10px)}
+.hero{position:relative;overflow:hidden;background:linear-gradient(112deg,rgba(10,30,58,.97),rgba(17,53,91,.91));padding:30px}
+.hero:after{content:"";position:absolute;right:-75px;top:-130px;width:340px;height:340px;border:1px solid rgba(133,190,250,.16);border-radius:50%;box-shadow:0 0 0 28px rgba(133,190,250,.025),0 0 0 58px rgba(133,190,250,.02);pointer-events:none}
+.eyebrow{color:#9bcaff;letter-spacing:2.4px}
+.hero h1{letter-spacing:-.7px;text-shadow:0 3px 24px rgba(91,157,230,.18)}
+.hero p{color:#d5e5f8}
+.metric,.material,.step,.result{background:rgba(5,19,38,.72);border-color:rgba(111,169,230,.25)}
+.metric{box-shadow:inset 0 1px rgba(255,255,255,.035)}
+.metric b,.step b{color:#91c4ff}
+.nav{position:relative}
+.nav button,button{background:linear-gradient(180deg,#173b64,#102b4c);border-color:#416b99;color:#f5f9ff;box-shadow:0 4px 12px rgba(0,0,0,.14)}
+.nav button:hover,button:hover{background:linear-gradient(180deg,#24568b,#173b65);border-color:#8bbfff;box-shadow:0 0 18px rgba(83,155,232,.18);transform:translateY(-1px)}
+.nav button.active,button.primary{background:linear-gradient(110deg,#2868a8,#174b80);border-color:#8bc1ff;box-shadow:0 0 20px rgba(83,155,232,.2)}
+button{transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease}
+.panel{background:linear-gradient(145deg,rgba(15,39,69,.94),rgba(8,25,47,.94));border-radius:14px}
+.panel h2{letter-spacing:.15px}
+.panel h3{color:#dcecff}
+input,select,textarea{background:rgba(4,17,34,.9);border-color:#42658d;color:#f4f8ff}
+input:hover,select:hover,textarea:hover{border-color:#719ed0}
+input:focus,select:focus,textarea:focus{border-color:#9ac8ff;box-shadow:0 0 0 3px rgba(100,164,232,.13);outline:none}
+.result{border-color:#5d8fc3}
+.pill{color:#c8e2ff;border-color:#527eae;background:rgba(56,105,160,.12)}
+.note{border-left-color:#7eb7f4;background:rgba(25,56,91,.52);color:#e0edfc}
+.warn,.danger,.ok{color:#a9cefa}
+.source{border-bottom-color:rgba(112,169,226,.22)}
+.source a,a{color:#9bcaff}
+footer{color:#a9bfd9;border-top-color:rgba(112,169,226,.24)}
+/* Keep all status accents within the requested blue-and-white identity. */
+[style*="#58d6e8"],[style*="#55cce0"]{color:#9bcaff!important}
+[style*="#ffc36b"],[style*="--gold"]{color:#a9cefa!important}
+@media(max-width:760px){.hero{padding:21px}.hero:after{opacity:.45}.brand{font-size:25px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+
 </style>
 </head>
 <body>
