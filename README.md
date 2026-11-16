@@ -115,6 +115,14 @@ NASA PSI: https://psi.nasa.gov/physci/repo/
 
 **PHOENIX — Turning combustion science into crew protection.**
 
+
+
+## Judge preparation
+
+A practical guide with anticipated judge questions, accurate capability boundaries, a suggested demonstration route, and failed-demo recovery steps:
+
+https://github.com/hbourouha-space/PHOENIX/blob/main/JUDGE_PREPARATION_GUIDE.md
+
 ## The Builder's Journey
 
 This challenge began with a practical uncertainty: I was worried about coding, working from a Chromebook, and learning unfamiliar tools. I chose to keep going, learn by building, and bring two engineering and research projects to submission for NASA Space Apps.
